@@ -11,6 +11,7 @@
 <body>
 
 <h1>It is a heading 1</h1>
+<p>Another paragraph</p>
     
 </body>
 </html>
