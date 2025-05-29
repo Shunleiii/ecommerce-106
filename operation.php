@@ -1,6 +1,10 @@
 <?php
 
 require_once "dbconnect.php";
+if(!isset($_SESSION))
+{
+    session_start();
+}
 
 if (isset($_POST['insert_movie']))
 {
@@ -18,7 +22,9 @@ if (isset($_POST['insert_movie']))
         $status = $stmt->execute([null, $title, $rdate, $rtime, $genre, $company, $country ]);
         if ($status)
         {
-            echo "movie record has been inserted successfully!"; 
+            // echo "movie record has been inserted successfully!";
+            $_SESSION['insertSuccess'] = "One movie record has been inserted successfully";
+            header("Location: viewmovie.php");
         }
 
     }catch(PDOException $e){
@@ -26,6 +32,11 @@ if (isset($_POST['insert_movie']))
 
     }
 
+}
+
+if($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['mid']))
+{
+    echo "in edit";
 }
 
 ?>
