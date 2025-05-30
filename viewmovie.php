@@ -7,7 +7,7 @@ if(!isset($_SESSION))
 }
 
 try{
-    $sql = "select * from movies order by title limit 10";
+    $sql = "select * from movies order by title limit 20";
     $stmt = $pdo->query($sql);
     $stmt->execute();
     $movie = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -48,8 +48,18 @@ try{
             { ?>
 
             <p class="alert alert-success">
-                <?php echo $_SESSION['insertSuccess']; ?>
+                <?php echo $_SESSION['insertSuccess'];
+                unset ($_SESSION['insertSuccess']); ?>
+            </p>
+    
+            <?php }
 
+            else if(isset($_SESSION['deleteSuccess']))
+            { ?>
+
+            <p class="alert alert-danger">
+                <?php echo $_SESSION['deleteSuccess'];
+                unset ($_SESSION['deleteSuccess']);  ?>
             </p>
         
             <?php }
@@ -65,6 +75,7 @@ try{
                         <th>Runtime</th>
                         <th>Company</th>
                         <th>Country</th>
+                        <th>Image</th>
 
                         <th>action</th>
                         <th>action</th>
@@ -79,9 +90,10 @@ try{
                         <td> <?php echo $movies['runtime'] ?> </td>
                         <td> <?php echo $movies['company'] ?> </td>
                         <td> <?php echo $movies['country'] ?> </td>
+                        <td> <img style="width: 60px; height: 80px;" src="<?php echo $movies['image_path']; ?>"> </td>
 
                         <td><a class="btn btn-primary" href="./operation.php?mid=<?php echo $movies['id']; ?>"> Edit </a></td>
-                        <td><a class="btn btn-danger" href=""> Delete </a></td>
+                        <td><a class="btn btn-danger" href="./operation.php?did=<?php echo $movies['id']; ?>"> Delete </a></td>
                     </tr>
 
                     <?php } ?>

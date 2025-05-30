@@ -15,7 +15,7 @@
     <div class = "row">
         <div class="col-sm-6">
                 <h3> Insert a new movie </h3>
-            <form class="form" method = "post" action="<?php echo "operation.php"; ?>">
+            <form class="form" method = "post" action="<?php echo "operation.php"; ?>" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for = "title" class = "form-label"> Movie Title </label>
                     <input type = "text" class = "form-control" id="title" name="title">
@@ -44,6 +44,11 @@
                 <div class="mb-3">
                     <label for="country" class="form-label">Country</label>
                     <input type = "text" class = "form-control" id="country" name="country">
+                </div>
+
+                <div class="mb-3">
+                    <label for="image_path" class="form-label">Image</label>
+                    <input type = "file" class = "form-control form-control-sm" id="image_path" name="image">
                 </div>
                 
                 <button type ="submit" class = "btn btn-primary" name="insert_movie"> Insert Movie </button>
