@@ -7,12 +7,13 @@ if(!isset($_SESSION))
 }
 
 try{
-    $sql = "select * from movies order by title limit 20";
+    $sql = "select m.id, m.title, m.release_date, m.runtime, g.g_name as genre, m.company, m.country, m.image_path 
+            from movies m, genre g
+            where m.genre = g.gID;";
     $stmt = $pdo->query($sql);
     $stmt->execute();
     $movie = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    
 }catch(PDOException $e)
 {
     echo $e->getMessage();

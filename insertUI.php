@@ -1,5 +1,20 @@
 <?php
 
+require_once "dbconnect.php";
+
+try{
+    $sql = "select * from genre";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $genres = $stmt->fetchAll(PDO::FETCH_ASSOC); //getting all rows from genre table
+
+
+
+}catch(PDOException $e)
+{
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +38,16 @@
 
                 <div class="mb-3">
                     <label for="genre" class="form-label">Genre</label>
-                    <input type = "text" class = "form-control" id="genre" name="genre">
+                    <select class = "form-select" id="genre" name="genre">
+                        <option>select genre</option>
+                        <?php if(isset($genres)) {
+                            foreach($genres as $genre)
+                            {
+                                echo "<option value=$genre[gID]> $genre[g_name] </option>";
+                            ?>
+                            <?php } } ?>
+
+                    </select>
                 </div>
 
                 <div class="mb-3">
